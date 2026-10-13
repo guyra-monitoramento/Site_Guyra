@@ -19,7 +19,15 @@ const pegarMedidas = async() => {
     return result[0] ?? null;
 };
 
+const mediaHora = async() => {
+    const [result] = await pool.query(
+        "SELECT AVG(temperatura) AS mediaTemperatura, AVG(umidade) AS mediaUmidade FROM tb_medidas WHERE data_hora >= NOW() - INTERVAL 1 HOUR"
+    );
+    return result[0] ?? null;;
+};
+
 export{
     criarMedidas,
-    pegarMedidas
+    pegarMedidas,
+    mediaHora
 };

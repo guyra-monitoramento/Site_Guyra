@@ -1,5 +1,7 @@
 import {
-    criarMedidas
+    criarMedidas,
+    pegarMedidas,
+    mediaHora
 } from '../models/medicoesModel.js';
 
 const criarMedidasController = async (req, res) => {
@@ -18,6 +20,40 @@ const criarMedidasController = async (req, res) => {
     }
 };
 
+const pegarMedidasController = async(req, res) => {
+    try {
+        const medicoes = await pegarMedidas();
+
+        if (medicoes === null){
+            return res.status(404).json({erro: "Nenhum medição foi encontrada no banco de dados"});
+        }
+
+        res.status(200).json(medicoes);
+    } catch (e){
+        res.status(500).json({erro: "Falha ao pegar as medidas"})
+    }
+}
+
+const mediaHoraController = async(req, res) => {
+    try{
+        const medicoes = await mediaHora();
+
+        if(medicoes === null){
+            return res.status(400).json({erro: "Nenhuma medida encontrada"})
+        } else {
+            if (medicoes.mediaTemperatura === null || medicoes.mediaUmidade === null){
+                return res.status(404).json({erro:"Nenhuma medição foi encontrada no banco de dados"});
+            }
+
+            res.status(200).json(medicoes);
+        }
+    } catch (e){
+        res.status(500).json({erro: "Falha ao pegar as medidas"});
+    }
+}
+
 export {
-    criarMedidasController
+    criarMedidasController,
+    pegarMedidasController,
+    mediaHoraController
 };
