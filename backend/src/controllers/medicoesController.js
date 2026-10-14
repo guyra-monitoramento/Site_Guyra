@@ -3,6 +3,9 @@ import {
     pegarMedidas,
     mediaHora
 } from '../models/medicoesModel.js';
+import {
+    checarMedidas
+} from '../services/alertaService.js'
 
 const criarMedidasController = async (req, res) => {
     try{
@@ -13,6 +16,7 @@ const criarMedidasController = async (req, res) => {
         }
 
         const medicoes = await criarMedidas (temperatura, umidade);
+        await checarMedidas (temperatura, umidade);
 
         res.status(201).json(medicoes);
     } catch (e){

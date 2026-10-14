@@ -39,10 +39,7 @@
                 </div>
                 <div class = "alertas">
                     <h1>Ultimos <span style = "color: #be1e1e">Alertas</span></h1>
-                    <div class = "divAlerta">
-                        <h2>14/05/26: Altas temperaturas ~ 37°C</h2>
-                        <h3>A temperatura registrada é considerada risco para sua criação</h3>
-                    </div>
+                    <div id = "alertaTemp"></div>
                 </div>
                 </div>
             </dialog>
@@ -51,7 +48,7 @@
         <div class = "cardDados">
             <h2>Umidade</h2>
             <h4>Média</h4>
-            <h1>52%</h1>
+            <h1 id = "umid"></h1>
             <button class = "abrirModal" data-modal = "modalUmid"><h3>Toque para ver detalhes</h3></button>
             <dialog id = "modalUmid">
                 <button class = "fecharModal" data-modal = "modalUmid">
